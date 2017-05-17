@@ -2,6 +2,7 @@
 #define MAJ_POINTERS_H
 
 #include "fzmaj.h"
+#include "defs.h"
 
 namespace FZMAJ_NS {
 
@@ -19,6 +20,11 @@ public:
 		memory(ptr->memory),
 		error(ptr->error),
 		input(ptr->input),
+		tools(ptr->tools),
+		paili(ptr->paili),
+
+		game(ptr->game),
+
 		infile(ptr->infile),
 		screen(ptr->screen),
 		logfile(ptr->logfile) {}
@@ -30,6 +36,9 @@ protected:
 	Memory *&memory;
 	Error *&error;
 	Input *&input;
+	Tools *&tools;
+	Paili *&paili;
+	Game *&game;
 
 	FILE *&infile;
 	FILE *&logfile;

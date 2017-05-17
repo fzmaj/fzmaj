@@ -11,6 +11,10 @@ public:
 	class Memory *memory;
 	class Error *error;
 	class Input *input;
+	class Tools *tools;
+	class Paili *paili;
+
+	class Game *game;
 
 	FILE *infile;
 	FILE *logfile;

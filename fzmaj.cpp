@@ -2,6 +2,10 @@
 #include "memory.h"
 #include "error.h"
 #include "input.h"
+#include "tools.h"
+#include "paili.h"
+
+#include "game.h"
 
 #include "string.h"
 #include "ctype.h"
@@ -73,6 +77,10 @@ FZMAJ::FZMAJ(int narg, char **arg)
 		error->done();
 	}
 
+	tools = new Tools(this);
+	paili = new Paili(this);
+
+	game = new Game(this);
 	input = new Input(this,narg,arg);
 }
 

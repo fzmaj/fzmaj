@@ -7,6 +7,11 @@
 #include "input.h"
 #include "memory.h"
 #include "error.h"
+#include "check.h"
+
+#include "random_mars.h"
+#include "game.h"
+#include "ai.h"
 
 #define DELTALINE 256
 #define DELTA 4
@@ -24,6 +29,7 @@ Input::Input(FZMAJ *maj, int argc, char **argv) : Pointers(maj)
     nfile = 1;
 
     command_map = new std::map<std::string,CommandCreator>();
+	rantest = new RanMars(maj,12321);
 
 #define COMMAND_CLASS
 #define CommandStyle(key,Class) \
@@ -44,6 +50,7 @@ Input::~Input()
   memory->sfree(line);
   memory->sfree(arg);
   delete command_map;
+  delete rantest;
 }
 
 
@@ -236,6 +243,8 @@ int Input::execute_command()
 {
     int flag = 1;
     if (!strcmp(command,"run_test")) run_test();
+	else if (!strcmp(command, "q")) q();
+	else if (!strcmp(command,"ai_style")) ai_style();
     else flag = 0;
   // return if command was listed above
     if (flag) return 0;
@@ -259,6 +268,23 @@ void Input::command_creator(FZMAJ *maj, int narg, char **arg)
 
 void Input::run_test()
 {
-    if (screen) fprintf(screen, "Hello, world!\n");
+    double a;
+	if (screen) fprintf(screen, "Hello, world!\n");
+	a=rantest->uniform();
+	fprintf(screen, "ran=%f\n",a);
+	game->game_start(12321);
 }
 
+void Input::q()
+{
+	if (screen) fprintf(screen, "Quit.\n");
+	exit(1);
+
+}
+
+void Input::ai_style()
+{
+	if (narg < 2) error->all(FLERR, "Illegal ai_style command");
+	int pos=atoi(arg[0]);
+	game->create_ai(arg[1],pos);
+}

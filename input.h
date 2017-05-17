@@ -37,6 +37,12 @@ private:
 	int execute_command();
 
 	void run_test(); // FZMAJ Commands
+	void q(); // Quit
+	void ai_style();
+
+
+	class RanMars *rantest;
+
 protected:
 	template <typename T> static void command_creator(FZMAJ *, int, char**);
 

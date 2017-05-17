@@ -1,0 +1,33 @@
+#ifndef MAJ_PAILI_H
+#define MAJ_PAILI_H
+
+#include "pointers.h"
+#include "defs.h"
+
+namespace FZMAJ_NS {
+
+class Paili : protected Pointers {
+
+public:
+
+  Paili(class FZMAJ *);
+  ~Paili();
+
+
+  void test(Bakyou*);
+
+protected:
+  Bakyou *bak;
+
+  int test_agari_kata();
+
+  int is_mentsu(int);
+  int is_atama_mentsu(int,int);
+
+
+};
+
+}
+
+
+#endif

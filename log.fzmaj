@@ -1,1 +1,4 @@
-run_test
+check 123456s789p11122m
+check 123456789s11122p
+check 123m44455566677p
+q
