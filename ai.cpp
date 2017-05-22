@@ -16,5 +16,5 @@ AI::~AI()
 
 void AI::return_act(int act, int argout)
 {
-	game->deal_act(act,argout);
+    game->deal_act(act,argout);
 }

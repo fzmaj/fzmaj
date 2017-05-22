@@ -28,6 +28,9 @@ void Paili::test(Bakyou *b)
 	printf(" n_tehai = %d\n",cnt);
 	if(cnt%3==0){
 		printf(" wrong tehai number\n");
+        for(i=0;i<b->tehai.size();++i)
+            printf( " %s",b->tehai[i].pai_str.c_str());
+        printf("\n");
 		return;
 	}
 	// print tehai
@@ -200,7 +203,10 @@ int Paili::agari(Bakyou* b)
 	score_oya = 0;
 	n_syuntsu = 0;
 	n_kotsu = 0;
+    n_ankan = 0;
 	atama = 0;
+    n_naki_kotsu = 0;
+    n_naki_syuntsu = 0;
 
 	pat.clear();
 	n_pat = 0;
@@ -213,6 +219,8 @@ int Paili::agari(Bakyou* b)
 	}
 
 	count_naki();
+    for(i=0;i<34;++i)
+        c_bak[i]=c[i];
 	toku_handan();
 
 }
@@ -282,11 +290,16 @@ void Paili::add_pat()
 	tmp_pat.is_yakuman = 0;
 	tmp_pat.yakuman_baisu = 0;
 
+    tmp_pat.n_ankan = n_ankan;
+    tmp_pat.n_kan = n_ankan + n_naki_kan;
+
 	for(i=0;i<34;++i) {
 		tmp_pat.kotsu[i]=kotsu[i];
 		tmp_pat.syuntsu[i]=syuntsu[i];
 		tmp_pat.naki_kotsu[i]=naki_kotsu[i];
 		tmp_pat.naki_syuntsu[i]=naki_syuntsu[i];
+
+        tmp_pat.c[i]=c_bak[i]+c_naki[i];
 	}
 	tmp_pat.atama = atama;
 
@@ -296,22 +309,30 @@ void Paili::add_pat()
 
 void Paili::count_naki()
 {
-	int i;
+	int i,k;
 	n_naki_syuntsu = 0;
 	n_naki_kotsu = 0;
 	n_ankan = 0;
 	n_naki_kan = 0;
 	
+    for(i=0;i<34;++i)
+        c_naki[i]=0;
 	for(i=0;i<bak->n_naki[0];++i)
 	{
 		if (bak->naki[0][i].naki_type == NAKI_CHII)
-		{	++n_naki_syuntsu;++naki_syuntsu[bak->naki[0][i].naki_pai[0].pai_c];}
+		{	++n_naki_syuntsu;k=bak->naki[0][i].naki_pai[0].pai_c;
+            ++naki_syuntsu[k];
+            ++c_naki[k];++c_naki[k+1];++c_naki[k+2];
+        }
 		else if (bak->naki[0][i].naki_type == NAKI_PON)
-		{	++n_naki_kotsu;++naki_kotsu[bak->naki[0][i].naki_pai[0].pai_c];}
+		{	++n_naki_kotsu;k=bak->naki[0][i].naki_pai[0].pai_c;
+            ++naki_kotsu[k];c_naki[k]+=3;}
 		else if (bak->naki[0][i].naki_type == NAKI_ANKAN)
-		{	++n_ankan;++kotsu[bak->naki[0][i].naki_pai[0].pai_c];}
+		{	++n_ankan;k=bak->naki[0][i].naki_pai[0].pai_c;
+            ++kotsu[k];c_naki[k]+=4;}
 		else if (bak->naki[0][i].naki_type == NAKI_MINKAN || bak->naki[0][i].naki_type == NAKI_KAKAN)
-		{	++n_naki_kan;++naki_kotsu[bak->naki[0][i].naki_pai[0].pai_c];}
+		{	++n_naki_kan;k=bak->naki[0][i].naki_pai[0].pai_c;
+            ++naki_kotsu[k];c_naki[k]+=4;}
 	}
 }
 
@@ -357,7 +378,7 @@ void Paili::run_tehai(int depth)
 			i_atama(depth);run_tehai(depth+1);d_atama(depth);
 		}
 		if (i<7&&c[depth+1]&&c[depth+2]) {
-			i_syuntsu(depth);run_tehai(depth+1);d_syuntsu(depth);
+			i_syuntsu(depth);run_tehai(depth);d_syuntsu(depth);
 		}
 		break;
 	}

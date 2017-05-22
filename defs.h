@@ -135,6 +135,7 @@ struct Bakyou {
 struct Pattern {
 
   int c[34];
+  int cc[34];
   int score;
   int score_oya;
   int score_ko;

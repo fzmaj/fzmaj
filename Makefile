@@ -23,5 +23,5 @@ Maj: $(OBJ)
 	$(CC) $(CFLAGS) -c $<
 
 clean:
-	rm *.o
+	rm *.o;rm log.fzmaj;rm Maj*
 

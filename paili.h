@@ -71,6 +71,8 @@ protected:
   void count_naki();
 
   int c[34];
+  int c_bak[34];
+  int c_naki[34];
 
 
 };

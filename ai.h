@@ -10,13 +10,13 @@ class AI : protected Pointers {
 
 public:
 
-	int pos_me;
-	char* style;
+    int pos_me;
+    char* style;
 
     AI(class FZMAJ *);
     virtual ~AI();
 
-	virtual void request(Bakyou*) = 0;
+    virtual void request(Bakyou*) = 0;
     void return_act(int,int);
 
 };

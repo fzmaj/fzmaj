@@ -216,10 +216,13 @@ void Check::set_empty_bakyou()
 		bak.rank[i] = i;
 		bak.n_naki[i]=0;
 		bak.junmoku[i]=0;
+        bak.reach_jun[i]=0;
 		bak.river[i].clear();
 		bak.naki[i].clear();
 
 	}
+    bak.cur_pos = 0;
+    bak.pos_me = 0;
 }
 
 void Check::help()
