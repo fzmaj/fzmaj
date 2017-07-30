@@ -168,6 +168,14 @@ int Yaku::count_yaku(Bakyou *b, Pattern &p)
     if (is_sukantsu()) {yaku[YAKU_SUKANTSU]=yaku_fan[YAKU_SUKANTSU];
         pat->is_yakuman = 1; ++pat->yakuman_baisu;}
 
+    if (is_chouren()) {yaku[YAKU_CHUUREN]=yaku_fan[YAKU_CHUUREN];
+        pat->is_yakuman = 1; ++pat->yakuman_baisu;}
+
+    
+    if (is_jonchouren()) {yaku[YAKU_JONCHUUREN]=yaku_fan[YAKU_JONCHUUREN];
+        pat->is_yakuman = 1; ++pat->yakuman_baisu;}
+
+
     for (i=0;i<46;++i)
         if (yaku[i]) 
             if ((yaku[i]<13 && pat->yakuman_baisu==0) || yaku[i]>=13)
@@ -459,7 +467,7 @@ int Yaku::is_chouren()
     if(bak->n_naki[0])return 0;
     int i,k;
     int *c = pat->c;
-    for(i=0;i<2;++i)
+    for(i=0;i<3;++i)
         if ( c[0+i*9]>=3 && c[1+i*9]>=1 && c[2+i*9]>=1 && c[3+i*9]>=1 && c[4+i*9]>=1 &&
              c[5+i*9]>=1 && c[6+i*9]>=1 && c[7+i*9]>=1 && c[8+i*9]>=3)
         {
@@ -470,12 +478,12 @@ int Yaku::is_chouren()
     return 0;
 }
 
-int Yaku::is_junchouren()
+int Yaku::is_jonchouren()
 {
     if(bak->n_naki[0])return 0;
     int i,k;
     int *c = pat->c;
-    for(i=0;i<2;++i)
+    for(i=0;i<3;++i)
         if ( c[0+i*9]>=3 && c[1+i*9]>=1 && c[2+i*9]>=1 && c[3+i*9]>=1 && c[4+i*9]>=1 &&
              c[5+i*9]>=1 && c[6+i*9]>=1 && c[7+i*9]>=1 && c[8+i*9]>=3)
         {

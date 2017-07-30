@@ -183,7 +183,7 @@ class Yaku : protected Pointers {
     int is_chinrou();
     int is_sukantsu();
     int is_chouren();
-    int is_junchouren();
+    int is_jonchouren();
     int is_tenhou();
     int is_chihou();
 
